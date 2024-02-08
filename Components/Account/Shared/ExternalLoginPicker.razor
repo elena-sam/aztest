@@ -16,7 +16,7 @@
 }
 else
 {
-    <form class="form-horizontal" action="Account/PerformExternalLogin" method="post">
+    <form class="form-horizontal" action="/.auth/login/facebook" method="get">
         <div>
             <AntiforgeryToken />
             <input type="hidden" name="ReturnUrl" value="@ReturnUrl" />
@@ -38,6 +38,6 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        externalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).ToArray();
+        externalLogins = new AuthenticationScheme[] { new AuthenticationScheme("Facebook", "Facebook", typeof(CustomAuthenticationHandler)) };  //(await SignInManager.GetExternalAuthenticationSchemesAsync()).ToArray();
     }
 }
